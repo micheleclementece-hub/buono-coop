@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#E2001A">
+<meta property="og:title" content="Buono Sconto €5 — Coop Caserta">
+<meta property="og:description" content="Buono sconto immediato €5 su spesa minima €25. Valido 4·5·6 maggio solo in Coop Via Roma 115 Caserta.">
+<meta property="og:type" content="website">
+<title>Buono €5 — Coop Caserta · 4·5·6 Maggio</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.5/JsBarcode.all.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --red:#E2001A;--teal:#1C5E7A;--cream:#F5EFE3;--white:#FFFFFF;
+  --red-dark:#B8001A;--teal-dark:#0D4058;
+}
+html,body{min-height:100vh;background:var(--red);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+
+/* ── WRAPPER ──────────────────────────────────────────────── */
+.wrapper{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px 16px 40px;
+  background:var(--red);
+  position:relative;overflow:hidden;
+}
+
+/* Decorative blob top-right */
+.wrapper::before{
+  content:'';position:absolute;top:-80px;right:-60px;
+  width:260px;height:260px;border-radius:50%;
+  background:rgba(255,255,255,.06);pointer-events:none;
+}
+.wrapper::after{
+  content:'';position:absolute;bottom:-50px;left:-40px;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(255,255,255,.04);pointer-events:none;
+}
+
+/* ── HEADER ───────────────────────────────────────────────── */
+.brand{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:20px;opacity:.9;
+}
+.logo-c{
+  width:44px;height:44px;border-radius:10px;
+  background:var(--white);
+  font-family:'Fraunces',serif;font-weight:900;font-size:22px;
+  color:var(--red);display:flex;align-items:center;justify-content:center;
+  letter-spacing:-1px;
+}
+.logo-t{font-size:15px;font-weight:500;color:rgba(255,255,255,.85);line-height:1.3}
+.logo-t strong{display:block;color:var(--white);font-weight:600;font-size:16px}
+
+/* ── BUONO CARD ───────────────────────────────────────────── */
+.buono{
+  width:100%;max-width:440px;
+  background:var(--cream);border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 24px 80px rgba(0,0,0,.35),0 4px 16px rgba(0,0,0,.2);
+  position:relative;
+  animation:slideUp .5s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── BUONO: HEADER ROSSO ──────────────────────────────────── */
+.buono-top{
+  background:var(--red);
+  padding:20px 22px 18px;
+  display:flex;justify-content:space-between;align-items:flex-start;
+}
+.bt-left h2{
+  font-family:'Fraunces',serif;font-weight:900;
+  font-size:24px;color:var(--white);line-height:1.1;
+  margin-bottom:2px;
+}
+.bt-left p{font-size:12px;color:rgba(255,255,255,.65);font-weight:500}
+.bt-right{
+  background:rgba(255,255,255,.15);border-radius:10px;
+  padding:8px 12px;text-align:center;border:1px solid rgba(255,255,255,.2);
+}
+.bt-right .days{font-size:11px;color:rgba(255,255,255,.7);font-weight:500;margin-bottom:3px}
+.bt-right .dates{font-family:'Fraunces',serif;font-weight:700;font-size:18px;color:var(--white);line-height:1}
+.bt-right .month{font-size:11px;color:rgba(255,255,255,.75);font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-top:1px}
+
+/* ── BUONO: CORPO ─────────────────────────────────────────── */
+.buono-body{
+  padding:24px 22px 20px;
+  display:flex;gap:18px;align-items:flex-start;
+}
+.bb-left{flex:1}
+.valor{
+  font-family:'Fraunces',serif;font-weight:900;
+  line-height:.85;color:var(--teal);
+  margin-bottom:10px;
+}
+.valor .num{font-size:96px;display:block}
+.valor .sym{font-size:72px}
+.valor .cents{font-size:48px;vertical-align:super}
+
+.bb-right{width:140px;flex-shrink:0;padding-top:4px}
+.cond-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--teal);color:var(--white);
+  font-size:11px;font-weight:600;
+  padding:5px 10px;border-radius:20px;
+  margin-bottom:8px;
+}
+.cond-badge svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2}
+.cond-text{font-size:12px;color:var(--teal);font-weight:500;margin-bottom:6px;line-height:1.4}
+.cond-text strong{font-weight:700}
+.cond-small{font-size:10px;color:#888;line-height:1.4}
+
+/* ── DIVISORE ─────────────────────────────────────────────── */
+.buono-div{
+  margin:0 22px;
+  border:0;border-top:1.5px dashed rgba(0,0,0,.12);
+  position:relative;
+}
+.buono-div::before,.buono-div::after{
+  content:'';position:absolute;top:-8px;
+  width:16px;height:16px;border-radius:50%;background:var(--red);
+}
+.buono-div::before{left:-30px}
+.buono-div::after{right:-30px}
+
+/* ── BARCODE ──────────────────────────────────────────────── */
+.buono-bc{
+  padding:16px 22px 18px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.buono-bc svg{max-width:260px;width:100%}
+.bc-note{font-size:10px;color:#aaa;letter-spacing:.04em}
+
+/* ── FOOTER CARD ──────────────────────────────────────────── */
+.buono-foot{
+  background:var(--teal);
+  padding:10px 22px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.bf-addr{font-size:11px;color:rgba(255,255,255,.75);font-weight:500}
+.bf-logo{
+  font-family:'Fraunces',serif;font-weight:900;font-size:16px;
+  color:var(--white);letter-spacing:-1px;
+  background:rgba(255,255,255,.15);border-radius:6px;
+  padding:3px 8px;
+}
+
+/* ── CONDIZIONI ───────────────────────────────────────────── */
+.note-box{
+  max-width:440px;width:100%;
+  margin-top:16px;
+  background:rgba(255,255,255,.08);border-radius:12px;
+  padding:13px 16px;
+  font-size:11px;color:rgba(255,255,255,.55);line-height:1.6;
+  text-align:center;
+}
+
+/* ── SAVE BUTTON ──────────────────────────────────────────── */
+.save-wrap{max-width:440px;width:100%;margin-top:14px}
+.btn-save{
+  width:100%;padding:15px;
+  background:var(--white);color:var(--red);
+  border:none;border-radius:14px;
+  font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:background .15s,transform .1s;
+  -webkit-appearance:none;
+}
+.btn-save:active{transform:scale(.98);background:#f5f5f5}
+.btn-save svg{width:18px;height:18px;flex-shrink:0}
+.btn-secondary{
+  width:100%;padding:13px;
+  background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);
+  border:1px solid rgba(255,255,255,.2);border-radius:14px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  cursor:pointer;margin-top:8px;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  transition:background .15s;
+  -webkit-appearance:none;
+}
+.btn-secondary:active{background:rgba(255,255,255,.18)}
+
+/* Print */
+@media print{
+  body,html{background:white}
+  .wrapper{background:white;padding:0;min-height:auto}
+  .brand,.note-box,.save-wrap{display:none}
+  .buono{box-shadow:none;max-width:100%;border-radius:0}
+  @page{margin:.5cm;size:15cm 8cm landscape}
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="brand">
+    <div class="logo-c">C</div>
+    <div class="logo-t">
+      <strong>Coop Via Roma 115</strong>
+      Caserta · Al Parco Shopping
+    </div>
+  </div>
+
+  <div class="buono" id="buono-card">
+
+    <!-- Header rosso -->
+    <div class="buono-top">
+      <div class="bt-left">
+        <h2>Buono Sconto<br>Immediato</h2>
+        <p>Esclusivo per i nostri clienti</p>
+      </div>
+      <div class="bt-right">
+        <div class="days">Valido nei giorni</div>
+        <div class="dates">4·5·6</div>
+        <div class="month">Maggio 2026</div>
+      </div>
+    </div>
+
+    <!-- Corpo: valore + condizioni -->
+    <div class="buono-body">
+      <div class="bb-left">
+        <div class="valor">
+          <span class="num">5</span><span class="sym">€</span>
+        </div>
+      </div>
+      <div class="bb-right">
+        <div class="cond-badge">
+          <svg viewBox="0 0 24 24"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+          sconto immediato
+        </div>
+        <div class="cond-text">
+          Su spesa minima<br>
+          <strong>di €25,00</strong>
+        </div>
+        <div class="cond-small">
+          1 buono per scontrino<br>
+          Non cumulabile<br>
+          Solo Coop Via Roma 115
+        </div>
+      </div>
+    </div>
+
+    <!-- Divisore decorativo -->
+    <div class="buono-div"></div>
+
+    <!-- Barcode -->
+    <div class="buono-bc">
+      <svg id="bc"></svg>
+      <span class="bc-note">Mostra al cassa per lo sconto</span>
+    </div>
+
+    <!-- Footer teal -->
+    <div class="buono-foot">
+      <span class="bf-addr">📍 Via Roma 115 · Caserta</span>
+      <span class="bf-logo">coop</span>
+    </div>
+
+  </div><!-- /buono -->
+
+  <div class="note-box">
+    Valido solo nei giorni 4·5·6 maggio 2026 · Spesa minima €25,00 · Non cumulabile con altre offerte · 1 buono per scontrino · Solo nel punto vendita di Caserta Via Roma 115
+  </div>
+
+  <div class="save-wrap">
+    <button class="btn-save" onclick="saveBuono()">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path d="M12 15V3m0 12-4-4m4 4 4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/>
+      </svg>
+      Salva o stampa il buono
+    </button>
+    <button class="btn-secondary" onclick="shareBuono()">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+      </svg>
+      Condividi questo buono
+    </button>
+  </div>
+
+</div>
+
+<script>
+JsBarcode('#bc','7901096504010',{
+  format:'EAN13',width:2.2,height:70,displayValue:true,
+  fontOptions:'',font:'DM Sans, sans-serif',textMargin:4,
+  fontSize:14,lineColor:'#1C5E7A',background:'transparent',
+  margin:0,marginBottom:2
+});
+
+function saveBuono(){
+  window.print();
+}
+
+async function shareBuono(){
+  const url = window.location.href;
+  if(navigator.share){
+    try{
+      await navigator.share({
+        title:'Buono Sconto €5 — Coop Caserta',
+        text:'Ecco il tuo buono sconto €5 su spesa min. €25 in Coop Via Roma 115 Caserta. Valido 4·5·6 maggio!',
+        url
+      });
+    }catch(e){}
+  } else {
+    try{
+      await navigator.clipboard.writeText(url);
+      alert('Link copiato! Incollalo dove vuoi condividerlo.');
+    }catch(e){
+      prompt('Copia questo link:', url);
+    }
+  }
+}
+</script>
+</body>
+</html>
